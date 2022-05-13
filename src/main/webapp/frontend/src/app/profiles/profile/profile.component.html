@@ -1,0 +1,148 @@
+<section class="profile-section">
+  <div class="container">
+    <div class="row">
+      <div class="btn-group btn-breadcrumb">
+        <a href="" class="btn btn-default"><span style="width: 14px; height: 14px;"
+                                                 class="material-icons">home</span></a>
+        <a class="btn btn-default">Profiles search</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="wrapper">
+        <form class="common-form">
+          <legend>Profiles search</legend>
+          <hr>
+          <fieldset>
+            <div class="row">
+              <div class="form-group col-md-3">
+                <label for="transaction-issuer-code">Issuercode</label>
+                <select [(ngModel)]="profileTerm" id="transaction-issuer-code" name="profileTerm" class="form-control"
+                        title="Choose an issuer code">
+                  <option value="string:*" selected="selected">* - All</option>
+                  <option value="00006">00006 - RCBC</option>
+                  <option value="00062">00062 - East West Bank</option>
+                  <option value="00070">00070 - China BankCorporation</option>
+                  <option value="10300">10300 - ReiseBank</option>
+                  <option value="16500">16500 - ING</option>
+                  <option value="16600">16600 - Comdirect</option>
+                  <option value="16900">16900 - Consorsbank</option>
+                  <option value="16950">16950 - Sparda-Bank</option>
+                  <option value="18500">18500 - Postbank</option>
+                  <option value="19440">19440 - Commerzbank AG</option>
+                  <option value="19450">19450 - Commerzbank Cobrands</option>
+                  <option value="19550">19550 -LandesbankBaden-Württemberg</option>
+                  <option value="19600">19600 - Landesbank Berlin</option>
+                  <option value="20000">20000 - OP Bank</option>
+                </select>
+              </div>
+              <div class="form-group col-md-offset-1 col-md-3">
+                <label class="control-label ng-scope">SubIssuer code</label>
+                <select class="form-control input-sm" title="Choose a sub issuer code">
+                  <option *ngFor="let sub of profiles | filter: profileTerm;"
+                          value="{{ sub.subIssuer['code'] }}">{{ sub.subIssuer['code']! + "-" + sub.subIssuer['name']! }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-3">
+                <label for="bin-range" data-translate="BIN_RANGE" class="ng-scope">BIN range</label>
+                <span aria-hidden="true" class="glyphicon glyphicon-info-sign"></span>
+                <input id="bin-range" name="binrange" type="text" class="form-control input-sm">
+                <p class="input-error ng-scope">BIN range is too long</p>
+              </div>
+              <div class="form-group col-md-offset-1 col-md-3">
+                <label for="name_profile_set">Profile SetName</label>
+                <input name="nameprofileset" class="form-control input-sm" id="name_profile_set" type="text">
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="row margin-top-10">
+            <div class="form-group col-md-12">
+              <button (click)="changeFunction()" class="btn btn-success ladda-button"><span class="ladda-label">
+                  <i class="fa fa-search"></i> <span class="ng-scope">Search</span>
+                </span><span class="ladda-spinner"></span></button>
+              <button class="btn btn-grey">
+                <i class="fa fa-times"></i> <span class="ng-scope">Reset</span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="profile-section">
+  <div class="container">
+    <div class="row">
+      <div *ngIf="showOnchange" class="wrapper">
+        <div class="dataTables_wrapper form-inline no-footer">
+          <div class="dataTables_filter">
+            <label>Search:
+              <input type="search" class="form-control input-sm" placeholder="">
+            </label>
+          </div>
+          <table class="table table-striped table-condensed table-hover ng-isolate-scope no-footer dataTable" style=""
+                 id="DataTables_Table_0" role="grid">
+            <thead class="ng-scope">
+            <tr role="row">
+              <th class="ng-scope sorting_asc" tabindex="0" rowspan="1" colspan="1" style="width: 0px;"
+                  aria-sort="ascending" aria-label="Issuer code: activate to sort column descending">Issuer code
+              </th>
+              <th class="ng-scope sorting" tabindex="0" rowspan="1" colspan="1" style="width: 0px;">SubIssuer code
+              </th>
+              <th class="ng-scope sorting" tabindex="0" rowspan="1" colspan="1" style="width: 0px;">Profile name
+              </th>
+              <th class="ng-scope sorting" tabindex="0" rowspan="1" colspan="1" style="width: 0px;">Authentication
+                mean
+              </th>
+              <th class="ng-scope sorting" tabindex="0" rowspan="1" colspan="1" style="width: 0px;">Creation date</th>
+              <th class="ng-scope sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">
+                Actions
+              </th>
+            </tr>
+            </thead>
+            <tbody class="ng-scope">
+            <!-- ngRepeat: item in profiles -->
+            <!-- end ngRepeat: item in profiles -->
+            <!-- end ngRepeat: item in profiles -->
+            <tr *ngFor="let profile of profiles | filter: profileTerm;" class="ng-scope odd" style="" role="row">
+              <td class="ng-binding sorting_1"> <span *ngIf="profile.subIssuer">{{ profile.subIssuer.issuer['code'] +
+              '-' + profile.subIssuer.issuer['name'] }}</span></td>
+              <td class="ng-binding"><span *ngIf="profile.subIssuer">{{ profile.subIssuer['code'] + '-' +
+              profile.subIssuer['name'] }}</span></td>
+              <td class="ng-binding">{{ profile.name }}</td>
+              <td class="ng-binding">{{ profile.authentMeans['name'] }}</td>
+              <td style="width: 12%" class="ng-binding">{{ profile.creationDate | date:'MM/dd/yyyy'}}</td>
+              <td style="width: 1%">
+                <a class="btn btn-primary btn-xs" ui-sref="acs.profile-details({profileId:item.id})"
+                   href="/acs-bo-service/acs/profile/1267d24e78da07bf801670357bc24bd26d5a7e8e4ebaa74991a3e03052a62568#profiles_results">
+                  <i class="fa fa-eye" title="See detail"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 2 of 2
+            entries
+          </div>
+          <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+            <ul class="pagination pagination-sm">
+              <li class="disabled"><a href="#" class="previous" aria-controls="DataTables_Table_0" data-dt-idx="0"
+                                      tabindex="0" id="DataTables_Table_0_previous">Previous</a></li>
+              <li></li>
+              <li class="active"><a href="#" class="" aria-controls="DataTables_Table_0" data-dt-idx="1"
+                                    tabindex="0">1</a></li>
+              <li class="disabled"><a href="#" class="next" aria-controls="DataTables_Table_0" data-dt-idx="2"
+                                      tabindex="0" id="DataTables_Table_0_next">Next</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

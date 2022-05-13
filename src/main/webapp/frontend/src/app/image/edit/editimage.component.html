@@ -1,0 +1,94 @@
+<section class="issuer_section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <div class="wrapper">
+              <div class="row  text-center" *ngIf="filename">
+                <div class="col">
+                  <button class="btn btn-success" type="button" (click)="downloadFile()">Download
+                    - {{filename}}</button>
+                </div>
+              </div>
+              <form [formGroup]="imageForm" (ngSubmit)="updateImageData()">
+                <table class="table">
+                  <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">CreatedBy</th>
+                    <th scope="col">CreationDate</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">LastUpdateBy</th>
+                    <th scope="col">LastUpdateDate</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">UpdateState</th>
+                    <th scope="col">BinaryData</th>
+                    <th scope="col">RelativePath</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <input class="form-control" type="text" formControlName="id" name="id"
+                             [(ngModel)]="image.id" placeholder="{{ image.id }}" readonly="true"
+                             style="width: 50px;">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="createdBy" name="createdBy"
+                             [(ngModel)]="image.createdBy" placeholder="{{ image.createdBy }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="test" formControlName="creationDate"
+                             name="authenticationTimeOut" [(ngModel)]="image.creationDate"
+                             placeholder="{{ image.creationDate }}" readonly="true">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="description" name="description"
+                             [(ngModel)]="image.description" placeholder="{{ image.description }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="lastUpdateBy" name="lastUpdateBy"
+                             [(ngModel)]="image.lastUpdateBy" placeholder="{{ image.lastUpdateBy}}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="date" formControlName="lastUpdateDate" name="lastUpdateDate"
+                             [(ngModel)]="image.lastUpdateDate" placeholder="{{ image.lastUpdateDate }}"
+                             readonly="true">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="name" name="name"
+                             [(ngModel)]="image.name" placeholder="{{ image.name }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="updateState" name="updateState"
+                             [(ngModel)]="image.updateState" placeholder="{{ image.updateState }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="binaryData" name="binaryData"
+                             [(ngModel)]="image.binaryData" placeholder="{{ image.binaryData }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="relativePath" name="relativePath"
+                             [(ngModel)]="image.relativePath" placeholder="{{ image.relativePath}}">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Generate SQL</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</section>
+

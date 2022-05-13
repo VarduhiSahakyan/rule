@@ -1,0 +1,178 @@
+<div class="panel panel-primary">
+  <div class="center-pill text-center"
+       style="border: 1px solid white; background-color: white ; padding-top: 10px; padding-bottom: 10px">
+    <h3 style="color: #337ab7">Authentication Means</h3>
+  </div>
+  <div class="container-fluid" style="overflow: auto">
+    <div class="row align-items-start" style="margin: 6px;">
+
+      <!--      Add Authentication Means data-->
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-title" style="color: #337ab7">Add authentication means data</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <form [formGroup]="authentMeansAddForm" (ngSubmit)="sendAuthentmeansData()">
+          <div class="form-group">
+            <div class="container">
+              <div class="form-group">
+                <label for="createdBy"><b>Creation By: </b></label>
+                <input type="text" id="createdBy" formControlName="createdBy" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="createdDate"><b>CreationDate: </b></label>
+                <input type="datetime-local" id="createdDate" formControlName="creationDate" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="description"><b>Description: </b></label>
+                <input type="text" id="description" formControlName="description" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="lastUpdateBy"><b>Last Update By: </b></label>
+                <input type="text" id="lastUpdateBy" formControlName="lastUpdateBy" class="form-control">
+              </div>
+              <div class="form-group">
+                <label><b>Name:</b></label>
+                <input type="text" formControlName="name" class="form-control">
+              </div>
+              <div class="form-group">
+                <label><b>Update State: </b></label>
+                <select class="form-select" type="text" formControlName="updateState">
+                  <option selected></option>
+                  <option value="1">PUSHED_TO_CONFIG</option>
+                  <option value="2">WAITING_FOR_PUSH</option>
+                  <option value="3">WAITING_VALIDATION</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" [disabled]="!authentMeansAddForm.valid" class="btn btn-primary btn-block"
+                    (click)="c('Cross click')">Save
+            </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c('Cross click')">Close
+            </button>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="row" style="width: 100%">
+          <button *ngIf="filename" class="btn btn-sm btn-outline-primary" style="width: auto; margin-right: auto;"
+                  (click)="downloadFile()">Download - {{filename}}
+          </button>
+          <button class="btn btn-sm btn-outline-primary" style="width: auto; margin-left: auto;" data-bs-toggle="modal"
+                  data-bs-whatever="@mdo" (click)="addAuthentmeans({content : content})">
+            Add
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table mat-table text-center">
+          <thead>
+          <tr style="color: #337ab7">
+            <th>ID</th>
+            <th>Created by</th>
+            <th>Creation date</th>
+            <th>Description</th>
+            <th>Last update by</th>
+            <th>LAST UPDATE DATA</th>
+            <th>NAME</th>
+            <th>UPDATE STATE</th>
+            <th size="15%">ACTION</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let authentMeans of authentMeanses">
+            <td>{{authentMeans.id}}</td>
+            <td>{{authentMeans.createdBy }}</td>
+            <td input type="datetime-local">{{authentMeans.creationDate}}</td>
+            <td>{{authentMeans.description}}</td>
+            <td>{{authentMeans.lastUpdateBy}}</td>
+            <td input type="datetime-local">{{authentMeans.lastUpdateDate}}</td>
+            <td>{{authentMeans.name}}</td>
+            <td>{{authentMeans.updateState}}</td>
+            <td>
+              <!--      Update Authentication Means data-->
+              <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title1" style="color: #337ab7">Update CryptoConfig data</h4>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                </div>
+                <form [formGroup]="authentMeansUpdateForm" (ngSubmit)="updateAuthentmeans()">
+                  <div class="form-group">
+                    <div class="container">
+                      <div class="form-group">
+                        <label for="id"><b>Id:</b></label>
+                        <input type="text" ngModel="{{authentMeans.id}}" readOnly id="id" formControlName="id"
+                               class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="createdBy"><b>Creation By:</b></label>
+                        <input type="text" ngModel="{{authentMeans.createdBy}}" formControlName="createdBy"
+                               class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label><b>Creation Date:</b></label>
+                        <input type="text" readonly placeholder="{{authentMeans.creationDate}}"
+                               ngModel="{{authentMeans.createdDate}}" formControlName="creationDate"
+                               class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label><b>Description:</b></label>
+                        <input type="text" ngModel="{{authentMeans.description}}" formControlName="description"
+                               class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="lastUpdateBy"><b>Last Update By:</b></label>
+                        <input type="text" ngModel="{{authentMeans.lastUpdateBy}}" formControlName="lastUpdateBy"
+                               class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label><b>Last Update Date:</b></label>
+                        <input type="text" readonly placeholder="{{authentMeans.lastUpdateDate}}"
+                               ngModel="{{authentMeans.lastUpdateDate}}" name="createdDate"
+                               formControlName="lastUpdateDate"
+                               class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label><b>Name:</b></label>
+                        <input type="text" ngModel="{{authentMeans.name}}" formControlName="name"
+                               class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label><b>Update State: </b></label>
+                        <select class="form-select" type="text" formControlName="updateState">
+                          <option [value]="authentMeans.updateState" selected>{{authentMeans.updateState}}</option>
+                          <option value="1">PUSHED_TO_CONFIG</option>
+                          <option value="2">WAITING_FOR_PUSH</option>
+                          <option value="3">WAITING_VALIDATION</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" [disabled]="!authentMeansUpdateForm.valid" class="btn btn-primary btn-block"
+                            (click)="c('Cross click')">Save
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c('Cross click')">
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </ng-template>
+              <button class="btn btn-sm btn-outline-primary" style="margin: 5px" (click)="updateCrypto({content : content});
+              getAuthentmeansById(authentMeans.id)">Update
+              </button>
+              <button class="btn btn-sm btn-outline-danger" style="margin: 5px"
+                      (click)="deleteAuthentmeansById(authentMeans.id)">Delete
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

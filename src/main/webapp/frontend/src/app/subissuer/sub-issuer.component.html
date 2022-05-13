@@ -1,0 +1,249 @@
+<section class="issuer_section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="wrapper">
+              <div class="row  text-center" *ngIf="filename">
+                <div class="col">
+                  <button class="btn btn-success" type="button" (click)="downloadFile()">Download
+                    - {{filename}}</button>
+                </div>
+              </div>
+              <form [formGroup]="subIssuerForm" (ngSubmit)="sendSubIssuerData()">
+                <table class="table">
+                  <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">AcsId</th>
+                    <th scope="col">AuthenticationTimeOut</th>
+                    <th scope="col">Language</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">CodeSvi</th>
+                    <th scope="col">CurrencyCode</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Label</th>
+                    <th scope="col">AuthentMeans</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <input class="form-control" type="text" formControlName="acsId" name="acsId">
+                    </td>
+                    <td>
+                      <input type="number" formControlName="authenticationTimeOut" class="form-control">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="defaultLanguage" name="defaultLanguage">
+                    </td>
+                    <td>
+                      <input class="form-control" type="number" formControlName="code" name="code">
+                    </td>
+                    <td>
+                      <input class="form-control" type="number" formControlName="codeSvi" name="codeSvi">
+                    </td>
+                    <td>
+                      <input class="form-control" type="number" formControlName="currencyCode" name="currencyCode">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="name" name="name">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="label" name="label">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="authentMeans" name="authentMeans">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <table class="table">
+                  <thead class="thead-dark">
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox" formControlName="personnalDataStorage"
+                                   id="personnalDataStorage">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="personnalDataStorage">PersonalDataStorage</label>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox" formControlName="resetBackupsIfSuccess"
+                                   id="resetBackupsIfSuccess">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="resetBackupsIfSuccess">ResetBackupsIfSuccess</label>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox" formControlName="resetChoicesIfSuccess"
+                                   id="resetChoicesIfSuccess">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="resetChoicesIfSuccess">ResetChoicesIfSuccess</label>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox"
+                                   formControlName="manageBackupsCombinedAmounts"
+                                   id="manageBackupsCombinedAmounts">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="manageBackupsCombinedAmounts">ManageBackupsCombinedAmounts</label>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox"
+                                   formControlName="manageChoicesCombinedAmounts"
+                                   id="manageChoicesCombinedAmounts">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="manageChoicesCombinedAmounts">ManageChoicesCombinedAmounts</label>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox" formControlName="hubMaintenanceModeEnabled"
+                                   id="hubMaintenanceModeEnabled">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;"
+                                 for="hubMaintenanceModeEnabled">HubMaintenanceModeEnabled</label>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  </thead>
+
+                </table>
+
+                <div class="form-group">
+                  <button type="submit" [disabled]="!subIssuerForm.valid" class="btn btn-primary btn-block">Generate
+                    SQL
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="row">
+    <div class="col" style="overflow: auto;">
+      <div *ngFor="let subIssuer of subIssuers;" class="wrapper">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">AcsId</th>
+            <th scope="col">Authentication
+              Time
+              Out
+            </th>
+            <th scope="col">Default
+              Language
+            </th>
+            <th scope="col">Code</th>
+            <th scope="col">CodeSvi</th>
+            <th scope="col">CurrencyCode</th>
+            <th scope="col">Name</th>
+            <th scope="col">Label</th>
+            <th scope="col">AuthentMeans</th>
+            <th scope="col">
+              Personal
+              Data
+              Storage
+            </th>
+            <th scope="col">
+              Reset
+              Backups
+              If
+              Success
+            </th>
+            <th scope="col">
+              Reset
+              Choices
+              If
+              Success
+            </th>
+            <th scope="col">
+              Manage
+              Backups
+              Combined
+              Amounts
+            </th>
+            <th scope="col">
+              Manage
+              Choices
+              Combined
+              Amounts
+            </th>
+            <th scope="col">
+              Hub
+              Maintenance
+              Mode
+              Enabled
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">{{ subIssuer.id }}</th>
+            <td>{{ subIssuer.acsId }}</td>
+            <td>{{ subIssuer.authenticationTimeOut }}</td>
+            <td>{{ subIssuer.defaultLanguage }}</td>
+            <td>{{ subIssuer.code }}</td>
+            <td>{{ subIssuer.codeSvi }}</td>
+            <td>{{ subIssuer.currencyCode }}</td>
+            <td>{{ subIssuer.name }}</td>
+            <td>{{ subIssuer.label }}</td>
+            <td>{{ subIssuer.authentMeans.substring(0, 57) }}</td>
+            <td>{{ subIssuer.personnalDataStorage }}</td>
+            <td>{{ subIssuer.resetBackupsIfSuccess }}</td>
+            <td>{{ subIssuer.resetChoicesIfSuccess }}</td>
+            <td>{{ subIssuer.manageBackupsCombinedAmounts }}</td>
+            <td>{{ subIssuer.manageChoicesCombinedAmounts }}</td>
+            <td>{{ subIssuer.hubMaintenanceModeEnabled }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="form-group">
+          <a routerLink="/subissuer/{{ subIssuer.code }}/edit" class="btn btn-success"> Update</a>
+          <a routerLink="/subissuer/{{ subIssuer.code }}/delete" class="btn btn-danger"> Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,123 @@
+<section class="issuer_section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="wrapper">
+              <div class="row  text-center" *ngIf="filename">
+                <div class="col">
+                  <button class="btn btn-success" type="button" (click)="downloadFile()">Download
+                    - {{filename}}</button>
+                </div>
+              </div>
+              <form [formGroup]="imageForm" (ngSubmit)="sendImageData()">
+                <table class="table">
+                  <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">CreatedBy</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">LastUpdateBy</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">UpdateState</th>
+                    <th scope="col">BinaryData</th>
+                    <th scope="col">RelativePath</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <input class="form-control" type="text" formControlName="createdBy" name="createdBy">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="description" name="description">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="lastUpdateBy" name="lastUpdateBy">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="name" name="name">
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <select class="form-select" type="text" formControlName="updateState">
+                          <option selected></option>
+                          <option value="1">PUSHED_TO_CONFIG</option>
+                          <option value="2">WAITING_FOR_PUSH</option>
+                          <option value="3">WAITING_VALIDATION</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="binaryData" name="binaryData">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="relativePath" name="relativePath">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <div class="form-group">
+                  <button type="submit" [disabled]="!imageForm.valid" class="btn btn-primary btn-block">Generate
+                    SQL
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="row">
+    <div class="col" style="overflow: auto;">
+      <div *ngFor="let image of images;" class="wrapper">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">CreatedBy</th>
+            <th scope="col">CreationDate</th>
+            <th scope="col">Description</th>
+            <th scope="col">LastUpdateBy</th>
+            <th scope="col">LastUpdateDate</th>
+            <th scope="col">Name</th>
+            <th scope="col">UpdateState</th>
+            <th scope="col">BinaryData</th>
+            <th scope="col">RelativePath</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">{{ image.id }}</th>
+            <td>{{ image.createdBy }}</td>
+            <td>{{ image.creationDate.substring(0, 10) }}</td>
+            <td>{{ image.description }}</td>
+            <td>{{ image.lastUpdateBy }}</td>
+            <td>{{ image.lastUpdateDate }}</td>
+            <td>{{ image.name }}</td>
+            <td>{{ image.updateState }}</td>
+            <td>{{ image.binaryData.substring(0, 10) }}</td>
+            <td>{{ image.resetChoicesIfSuccess}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="form-group">
+          <a routerLink="/image/edit/{{ image.id }}" class="btn btn-success"> Update</a>
+          <a routerLink="/image/delete/{{ image.id }}" class="btn btn-danger"> Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,170 @@
+<section class="issuer_section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <div class="wrapper">
+              <div class="row  text-center" *ngIf="filename">
+                <div class="col">
+                  <button class="btn btn-success" type="button" (click)="downloadFile()">Download
+                    - {{filename}}</button>
+                </div>
+              </div>
+              <form [formGroup]="subIssuerForm" (ngSubmit)="updateSubIssuerData()">
+                <table class="table">
+                  <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">AcsId</th>
+                    <th scope="col">AuthenticationTimeOut</th>
+                    <th scope="col">Language</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">CodeSvi</th>
+                    <th scope="col">CurrencyCode</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Label</th>
+                    <th scope="col">AuthentMeans</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <input class="form-control" type="text" formControlName="acsId" name="acsId"
+                             [(ngModel)]="subIssuer.acsId" placeholder="{{ subIssuer.acsId }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="number" formControlName="authenticationTimeOut"
+                             name="authenticationTimeOut" [(ngModel)]="subIssuer.authenticationTimeOut"
+                             placeholder="{{ subIssuer.authenticationTimeOut }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="defaultLanguage" name="defaultLanguage"
+                             [(ngModel)]="subIssuer.defaultLanguage" placeholder="{{ subIssuer.defaultLanguage }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="code" name="code"
+                             [(ngModel)]="subIssuer.code" placeholder="{{ subIssuer.code }}" readonly="true">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="codeSvi" name="codeSvi"
+                             [(ngModel)]="subIssuer.codeSvi" placeholder="{{ subIssuer.codeSvi }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="currencyCode" name="currencyCode"
+                             [(ngModel)]="subIssuer.currencyCode" placeholder="{{ subIssuer.currencyCode }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="name" name="name"
+                             [(ngModel)]="subIssuer.name" placeholder="{{ subIssuer.name }}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="label" name="label"
+                             [(ngModel)]="subIssuer.label" placeholder="{{ subIssuer.label}}">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" formControlName="authentMeans" name="authentMeans"
+                             [(ngModel)]="subIssuer.authentMeans" placeholder="{{ subIssuer.authentMeans }}">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <table class="table">
+                  <thead class="thead-dark">
+                  <tr>
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox" formControlName="personnalDataStorage"
+                                   ngModel="{{subIssuer?.personnalDataStorage}}" id="personnalDataStorage">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="personnalDataStorage">PersonalDataStorage</label>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox" formControlName="resetBackupsIfSuccess"
+                                   ngModel="{{subIssuer?.resetBackupsIfSuccess}}" id="resetBackupsIfSuccess">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="resetBackupsIfSuccess">ResetBackupsIfSuccess</label>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox" formControlName="resetChoicesIfSuccess"
+                                   ngModel="{{subIssuer?.resetChoicesIfSuccess}}" id="resetChoicesIfSuccess">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="resetChoicesIfSuccess">ResetChoicesIfSuccess</label>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox"
+                                   formControlName="manageBackupsCombinedAmounts"
+                                   ngModel="{{subIssuer?.manageBackupsCombinedAmounts}}"
+                                   id="manageBackupsCombinedAmounts">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="manageBackupsCombinedAmounts">ManageBackupsCombinedAmounts</label>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox"
+                                   formControlName="manageChoicesCombinedAmounts"
+                                   ngModel="{{subIssuer?.manageChoicesCombinedAmounts}}"
+                                   id="manageChoicesCombinedAmounts">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;" for="manageChoicesCombinedAmounts">ManageChoicesCombinedAmounts</label>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group">
+                        <div class="input-group mb-3" style="margin-top: 15px;">
+                          <div class="input-group-prepend">
+                            <input class="form-check-input" type="checkbox" formControlName="hubMaintenanceModeEnabled"
+                                   ngModel="{{subIssuer?.hubMaintenanceModeEnabled}}" id="hubMaintenanceModeEnabled">
+                          </div>
+                          <label class="form-check-label" style="margin-left: 15px;"
+                                 for="hubMaintenanceModeEnabled">HubMaintenanceModeEnabled</label>
+                        </div>
+                      </div>
+
+                    </td>
+                  </tr>
+                  </thead>
+                </table>
+
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Generate SQL</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</section>

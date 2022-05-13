@@ -1,0 +1,139 @@
+<div class="panel panel-primary">
+  <div class="center-pill text-center"
+       style="border: 1px solid white; background-color: white ; padding-top: 10px; padding-bottom: 10px">
+  </div>
+  <div class="container ng-scope" style="overflow: auto">
+
+    <div class="row align-items-start" style="margin: 6px;">
+      <h3 style="color: #337ab7">Configuration Cryptography</h3>
+
+      <!--      Add CryptoConfigurationEntity data-->
+
+      <ng-template #add let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-add-crypto" style="color: #337ab7">Add CryptoConfig data</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <form [formGroup]="cryptoConfigAddForm" (ngSubmit)="sendCryptoConfigData()">
+          <div class="form-group">
+            <div class="container">
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="protocolOne">Protocol one</label>
+                  <input type="text" id="protocolOne" formControlName="protocolOne" class="form-control">
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="protocolTwo">Protocol two</label>
+                  <input type="text" id="protocolTwo" formControlName="protocolTwo" class="form-control">
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <input type="text" id="description" formControlName="description" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" [disabled]="!cryptoConfigAddForm.valid" class="btn btn-primary btn-block"
+                    (click)="c('Cross click')">Save
+            </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c('Cross click')">Close
+            </button>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="row" style="width: 100%">
+          <button *ngIf="filename" class="btn btn-sm btn-outline-primary" style="width: auto; margin-right: auto;"
+                  (click)="downloadFile()">Download - {{filename}}
+          </button>
+          <button class="btn btn-sm btn-outline-primary" style="width: auto; margin-left: auto;" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)="addCrypto({content : add})">
+            New configuration
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table mat-table">
+          <thead>
+          <tr style="color: #337ab7">
+            <th>ID</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let cryptoConfig of cryptoConfigs">
+            <td>{{cryptoConfig.id}}</td>
+            <td>{{cryptoConfig.description}}</td>
+            <td>
+              <!--      Update CryptoConfigurationEntity data-->
+              <ng-template #update let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-update-crypto" style="color: #337ab7">Update CryptoConfig data</h4>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                </div>
+                <form [formGroup]="cryptoConfigUpdateForm" (ngSubmit)="updateCryptoConfig()">
+                  <div class="form-group">
+                    <div class="container">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label for="id"><b>Id: </b></label>
+                          <input type="text" [ngModel]="cryptoConfig?.id" readOnly id="id" formControlName="id"
+                                 class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label for="protocolOne"><b>protocolOne: </b></label>
+                          <input type="text" [ngModel]="cryptoConfig.protocolOne" id="protocolOne1"
+                                 formControlName="protocolOne" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label for="protocolTwo"><b>protocolTwo: </b></label>
+                          <input type="text" [ngModel]="cryptoConfig?.protocolTwo" id="protocolTwo1"
+                                 formControlName="protocolTwo" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label for="description"><b>description: </b></label>
+                          <input type="text" [ngModel]="cryptoConfig?.description" id="description1"
+                                 formControlName="description" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" [disabled]="!cryptoConfigUpdateForm.valid" class="btn btn-primary btn-block"
+                            (click)="c('Cross click')">Save
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c('Cross click')">
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </ng-template>
+              <button class="btn btn-sm btn-outline-primary" style="margin: 5px" (click)="updateCrypto({content : update});
+              getCryptoConfigById(cryptoConfig.id)">Update
+              </button>
+              <button class="btn btn-sm btn-outline-danger" style="margin: 5px" (click)="deleteById(cryptoConfig.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

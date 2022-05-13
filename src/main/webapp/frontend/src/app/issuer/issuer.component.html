@@ -1,0 +1,96 @@
+<section class="issuer_section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <div class="wrapper">
+              <div class="form-group col-md-4">
+                <select [(ngModel)]="filterTerm" (ngModelChange)="listOfIssuers();" class="form-select">
+                  <option value="00070">00070 China Bank Corporation</option>
+                  <option value="20000">20000 20000</option>
+                  <option value="10300">10300 10300</option>
+                  <option value="00006">00006 RCBC</option>
+                  <option value="19450">19450 Commerzbank Cobrands</option>
+                  <option value="00062">00062 East West Bank</option>
+                  <option value="19600">19600 Landesbank Berlin</option>
+                  <option value="19550">19550 Landesbank Baden-Württemberg</option>
+                  <option value="16500">16500 ING</option>
+                  <option value="16600">16600 Comdirect</option>
+                  <option value="19440">19440 Commerzbank AG</option>
+                  <option value="16900">16900 Consorsbank</option>
+                  <option value="18500">18500 Postbank</option>
+                  <option value="16950">16950 Sparda-Bank</option>
+                </select>
+              </div>
+            </div>
+
+            <div *ngIf="showOnchange" class="wrapper">
+              <form *ngFor="let issuer of issuers | filter: filterTerm;" [formGroup]="issuerForm"
+                    (ngSubmit)="onSubmit(issuer)">
+                <table class="table">
+                  <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">createdBy</th>
+                    <th scope="col">creationDate</th>
+                    <th scope="col">name</th>
+                    <th scope="col">updateState</th>
+                    <th scope="col">label</th>
+                    <th scope="col">availaibleAuthentMeans</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <input formControlName="id" class="form-control" type="text" placeholder="{{ issuer.id }}"
+                             [readonly]="true">
+                    </td>
+                    <td>
+                      <input formControlName="code" class="form-control" type="text" placeholder="{{ issuer.code }}"
+                             [readonly]="true">
+                    </td>
+                    <td>
+                      <input formControlName="createdBy" class="form-control" type="text"
+                             placeholder="{{ issuer.createdBy }}" [readonly]="true">
+                    </td>
+                    <td>
+                      <input formControlName="creationDate" class="form-control" type="date"
+                             placeholder="{{ issuer.creationDate }}" [readonly]="true">
+                    </td>
+                    <td>
+                      <input formControlName="name" class="form-control" type="text" placeholder="{{ issuer.name }}"
+                             [readonly]="true">
+                    </td>
+                    <td>
+                      <input formControlName="updateState" class="form-control" type="text"
+                             placeholder="{{ issuer.updateState }}" [readonly]="true">
+                    </td>
+                    <td>
+                      <input formControlName="label" class="form-control" type="text" placeholder="{{ issuer.label }}"
+                             [readonly]="true">
+                    </td>
+                    <td>
+                      <input formControlName="availaibleAuthentMeans" class="form-control" type="text"
+                             placeholder="{{ issuer.availaibleAuthentMeans }}" [readonly]="true">
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Generate SQL</button>
+                  <a routerLink="/issuer/{{ issuer.code }}/edit" class="btn btn-success">Update SQL</a>
+                  <a routerLink="/issuer/{{ issuer.code }}/delete" class="btn btn-danger">Delete SQL</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</section>
